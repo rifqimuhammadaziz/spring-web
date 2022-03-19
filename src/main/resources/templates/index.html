@@ -39,6 +39,7 @@
                     <th scope="col">Code</th>
                     <th scope="col">Product Name</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +48,10 @@
                     <td>[[ ${product.code} ]]</td>
                     <td>[[ ${product.name} ]]</td>
                     <td>[[ ${product.price} ]]</td>
+                    <td>
+                        <a class="btn btn-success" th:href="@{'/edit/'+${product.id}}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{'/delete/'+${product.id}}">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
