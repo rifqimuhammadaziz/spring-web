@@ -6,6 +6,7 @@ import rifqimuhammadaziz.springweb.entity.Product;
 import rifqimuhammadaziz.springweb.repository.ProductRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,5 +34,9 @@ public class ProductService {
 
     public void deleteById(long id) {
         productRepository.deleteById(id);
+    }
+
+    public List<Product> findByName(String keyword) {
+        return productRepository.findByNameContains(keyword);
     }
 }

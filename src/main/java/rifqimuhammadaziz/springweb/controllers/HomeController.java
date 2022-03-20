@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import rifqimuhammadaziz.springweb.dto.SearchFormData;
 import rifqimuhammadaziz.springweb.entity.Product;
 import rifqimuhammadaziz.springweb.service.ProductService;
 
@@ -21,6 +22,7 @@ public class HomeController {
     public String home(Model model) {
         String title = "Welcome to Spring Application";
         model.addAttribute("title", title);
+        model.addAttribute("searchForm", new SearchFormData());
         model.addAttribute("products", productService.findAll());
         return "index";
     }
@@ -54,6 +56,15 @@ public class HomeController {
     public String delete(@PathVariable("id") Long id) {
         productService.deleteById(id);
         return "redirect:/";
+    }
+
+    @PostMapping("/search")
+    public String searchData(SearchFormData searchFormData, Model model) {
+        String title = "Welcome to Spring Application";
+        model.addAttribute("title", title);
+        model.addAttribute("searchForm", searchFormData);
+        model.addAttribute("products", productService.findByName(searchFormData.getKeyword()));
+        return "index";
     }
 
 }
