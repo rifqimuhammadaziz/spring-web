@@ -1,20 +1,24 @@
 package rifqimuhammadaziz.springweb.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tb_product")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
     private Long id;
+
+    @Column(length = 10, nullable = false, unique = true)
     private String code;
+
+    @Column(length = 150, nullable = false)
     private String name;
+
     private double price;
 
     public Product() {
-    }
-
-    public Product(Long id, String code, String name, double price) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
-        this.price = price;
     }
 
     public Long getId() {
