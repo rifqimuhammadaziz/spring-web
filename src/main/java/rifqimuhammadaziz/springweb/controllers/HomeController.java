@@ -35,6 +35,7 @@ public class HomeController {
     @GetMapping("/add")
     public String viewAdd(Model model) {
         model.addAttribute("product", new Product());
+        model.addAttribute("searchForm", new SearchFormData());
         return "product/add";
     }
 
@@ -48,6 +49,7 @@ public class HomeController {
     @GetMapping("/edit/{id}")
     public String viewAdd(@PathVariable("id") Long id, Model model) {
         model.addAttribute("product", productService.findById(id));
+        model.addAttribute("searchForm", new SearchFormData());
         return "product/edit";
     }
 
