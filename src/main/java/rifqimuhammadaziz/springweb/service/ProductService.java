@@ -16,11 +16,15 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     public Iterable<Product> findAll() {
         return productRepository.findAll();
     }
 
     public void addProduct(Product product) {
+        emailService.sendEmail("rifqimuhammadaziz@gmail.com", "New Product Created", "A new Product has been created: " + product.getCode() + " - " + product.getName());
         productRepository.save(product);
     }
 
