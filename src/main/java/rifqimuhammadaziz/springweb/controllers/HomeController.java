@@ -11,12 +11,17 @@ import rifqimuhammadaziz.springweb.dto.SearchFormData;
 import rifqimuhammadaziz.springweb.entity.Product;
 import rifqimuhammadaziz.springweb.service.ProductService;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("")
 public class HomeController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private HttpSession session;
 
     @GetMapping
     public String home(Model model) {
@@ -63,6 +68,7 @@ public class HomeController {
         String title = "Welcome to Spring Application";
         model.addAttribute("title", title);
         model.addAttribute("searchForm", searchFormData);
+        session.setAttribute("searchKey", searchFormData.getKeyword());
         model.addAttribute("products", productService.findByName(searchFormData.getKeyword()));
         return "index";
     }
